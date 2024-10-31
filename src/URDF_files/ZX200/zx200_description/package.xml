@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>zx200_description</name>
+  <version>2.0.7</version>
+  <description>Zx120 resources used for MoveIt2</description>
+  <maintainer email="p.cesarino@qibitech.com">Qibitech</maintainer>
+  <license>TODO License</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <export>
+      <build_type>ament_cmake</build_type>
+  </export>
+</package>

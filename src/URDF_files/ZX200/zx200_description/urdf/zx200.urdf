@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="zx200">
+  <joint name="world_joint" type="fixed">
+    <origin xyz="0. 0. 0." rpy="0. 0. 0. "/>
+    <parent link="world_link"/>
+    <child link="caterpillar_link"/>
+  </joint>
+  <joint name="arm_cylinder_joint" type="continuous">
+    <origin xyz="3.245 0. 1.1624" rpy="0. 0.1361008 0. "/>
+    <parent link="boom_link"/>
+    <child link="arm_cylinder_link"/>
+    <axis xyz="0. 1. 0."/>
+  </joint>
+  <joint name="arm_joint" type="revolute">
+    <origin xyz="5.68 0. 0. " rpy="0. 1.5707963 0. "/>
+    <parent link="boom_link"/>
+    <child link="arm_link"/>
+    <axis xyz="0. 1. 0."/>
+    <limit lower="-1.05" upper="1.1400001" effort="1e8" velocity="0.5"/>
+  </joint>
+  <joint name="arm_piston_joint" type="prismatic">
+    <origin xyz="0.91 0. 0. " rpy="0. 0. 0."/>
+    <parent link="arm_cylinder_link"/>
+    <child link="arm_piston_link"/>
+    <axis xyz="1. 0. 0."/>
+    <limit lower="-0.85567" upper="0.93719" effort="1e8" velocity="0."/>
+  </joint>
+  <joint name="body_joint" type="revolute">
+    <origin xyz="0. 0. 0.9069" rpy="0. 0. 0."/>
+    <parent link="caterpillar_link"/>
+    <child link="body_link"/>
+    <axis xyz="0. 0. 1."/>
+    <limit lower="-3.14159265359" upper="3.14159265359" effort="1e8" velocity="0.2"/>
+  </joint>
+  <joint name="boom_cylinder_joint" type="continuous">
+    <origin xyz="0.6640044 -0.0000005 0.3249987" rpy="0. -1.3420005 0. "/>
+    <parent link="body_link"/>
+    <child link="boom_cylinder_link"/>
+    <axis xyz="0. 1. 0."/>
+  </joint>
+  <joint name="boom_joint" type="revolute">
+    <origin xyz="0.18 -0.04 0.93" rpy="0. -0.6999992 0. "/>
+    <parent link="body_link"/>
+    <child link="boom_link"/>
+    <axis xyz="0. 1. 0."/>
+    <limit lower="-0.5" upper="1.2" effort="1e8" velocity="0.6159937255"/>
+  </joint>
+  <joint name="boom_piston_joint" type="prismatic">
+    <origin xyz="1.3019998 0. 0. " rpy="0. 0. 0."/>
+    <parent link="boom_cylinder_link"/>
+    <child link="boom_piston_link"/>
+    <axis xyz="1. 0. 0."/>
+    <limit lower="-10." upper="10." effort="1e8" velocity="0."/>
+  </joint>
+  <joint name="bucket_cylinder_joint" type="continuous">
+    <origin xyz="0.4174586 -0. 0.6374535" rpy="0. 0.0261768 0. "/>
+    <parent link="arm_link"/>
+    <child link="bucket_cylinder_link"/>
+    <axis xyz="0. 1. 0."/>
+  </joint>
+  <joint name="bucket_end_joint" type="fixed">
+    <origin xyz="0.0000002 0. 1.23 " rpy="0. 0.8726646 0. "/>
+    <parent link="bucket_link"/>
+    <child link="bucket_end_link"/>
+  </joint>
+  <joint name="bucket_h_linkage_joint" type="continuous">
+    <origin xyz="0.6030336 -0.0000001 0.0162055" rpy="0. 1.0317165 0. "/>
+    <parent link="bucket_side_linkage_link"/>
+    <child link="bucket_h_linkage_link"/>
+    <axis xyz="0. 1. 0."/>
+  </joint>
+  <joint name="bucket_joint" type="revolute">
+    <origin xyz="2.915 -0.0000011 0. " rpy="0. 0. 0."/>
+    <parent link="arm_link"/>
+    <child link="bucket_link"/>
+    <axis xyz="0. 1. 0."/>
+    <limit lower="-0.216" upper="2.4500001" effort="1e8" velocity="0.5"/>
+  </joint>
+  <joint name="bucket_piston_joint" type="prismatic">
+    <origin xyz="0.4318195 0. 0.0276022" rpy="0. 0.0000032 0. "/>
+    <parent link="bucket_cylinder_link"/>
+    <child link="bucket_piston_link"/>
+    <axis xyz="1. 0. 0."/>
+    <limit lower="-0.08" upper="1.035" effort="1e8" velocity="0."/>
+  </joint>
+  <joint name="bucket_side_linkage_joint" type="continuous">
+    <origin xyz="2.4675 0. 0.0397" rpy="3.1415927 -1.2978926 3.1415927"/>
+    <parent link="arm_link"/>
+    <child link="bucket_side_linkage_link"/>
+    <axis xyz="0. 1. 0."/>
+  </joint>
+  <joint name="tooth_joint" type="fixed">
+    <origin xyz="1.473 0.0000011 -0.0000002" rpy="0. 0.0000001 0. "/>
+    <parent link="bucket_link"/>
+    <child link="tooth_link"/>
+  </joint>
+  <link name="world_link"/>
+  <link name="arm_cylinder_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="65.8099976"/>
+      <inertia ixx="0.1" ixy="0." ixz="0." iyy="9.95" iyz="0." izz="9.95"/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/arm_cylinder.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/arm_cylinder.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="arm_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="480."/>
+      <inertia ixx="14.24" ixy="0." ixz="31.36" iyy="319.92" iyz="0." izz="309.47"/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/arm.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/arm_link_arm_collision_geometry_arm_collision.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="arm_piston_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="48.1800003"/>
+      <inertia ixx="0.01" ixy="0." ixz="0." iyy="9.83" iyz="0." izz="9.83"/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/arm_piston.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/arm_piston.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="body_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="7000."/>
+      <inertia ixx="4751.6" ixy="-127.4" ixz="348.5" iyy="5734.1" iyz="-68.7" izz="9065.9"/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/body.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/body.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="boom_cylinder_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="131.6199951"/>
+      <inertia ixx="9.216249" ixy="0." ixz="0." iyy="27.606432" iyz="0." izz="36.503907"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0000003 0.0000005 0.0000046" rpy="0. 0.0000004 0. "/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/boom_cylinders.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0000003 0.0000005 0.0000046" rpy="0. 0.0000004 0. "/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/boom_cylinders.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="boom_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="1010."/>
+      <inertia ixx="103.9" ixy="0." ixz="44.8" iyy="1574.1" iyz="0." izz="1489.6"/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/boom.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/boom_link_boom_collision_geometry_boom_collision.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="boom_piston_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="78.0800018"/>
+      <inertia ixx="6.6836" ixy="0." ixz="0." iyy="22.5995" iyz="0." izz="29.2292"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0000004 0.0000005 0.0000041" rpy="0. 0.0000004 0. "/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/boom_pistons.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0000004 0.0000005 0.0000041" rpy="0. 0.0000004 0. "/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/boom_pistons.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="bucket_cylinder_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="65.8099976"/>
+      <inertia ixx="0.1" ixy="0." ixz="0." iyy="9.95" iyz="0." izz="9.95"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0018195 0. 0.0276036" rpy="0. 0.0000032 0. "/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/bucket_cylinder.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0018195 0. 0.0276036" rpy="0. 0.0000032 0. "/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/bucket_cylinder.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="bucket_end_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="0.001"/>
+      <inertia ixx="1e-6" ixy="0." ixz="0." iyy="1e-6" iyz="0." izz="1e-6"/>
+    </inertial>
+  </link>
+  <link name="bucket_h_linkage_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="57.4500008"/>
+      <inertia ixx="0.29" ixy="0." ixz="0." iyy="1.63" iyz="0." izz="1.88"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.0000002 0.0000001 0.0000001" rpy="0. 0.0000001 0. "/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/bucket_linkage_H_link.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.0000002 0.0000001 0.0000001" rpy="0. 0.0000001 0. "/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/bucket_linkage_H_link.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="bucket_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="351.5"/>
+      <inertia ixx="51.39" ixy="0." ixz="10.40" iyy="77.64" iyz="0." izz="91.99"/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0.0000011 0. " rpy="0. 0.0000001 0. "/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/bucket.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0.0000011 0. " rpy="0. 0.0000001 0. "/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/bucket_link_bucket_collision_geometry_bucket_collision.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="bucket_piston_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="48.1899986"/>
+      <inertia ixx="0.01" ixy="0." ixz="0." iyy="9.83" iyz="0." izz="9.83"/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/bucket_piston.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/bucket_piston.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="bucket_side_linkage_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="16.3470993"/>
+      <inertia ixx="0.2849" ixy="0." ixz="0." iyy="0.7623" iyz="0." izz="1.0241"/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/bucket_linkages_side.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/bucket_linkages_side.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="tooth_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="0.001"/>
+      <inertia ixx="1e-6" ixy="0." ixz="0." iyy="1e-6" iyz="0." izz="1e-6"/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="-0.785398 0. 0. "/>
+      <geometry>
+        <box size="0.03 0.09 0.1 "/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="-0.785398 0. 0. "/>
+      <geometry>
+        <box size="0.03 0.09 0.1 "/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="caterpillar_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="5000."/>
+      <inertia ixx="2000." ixy="0." ixz="0." iyy="4000." iyz="0." izz="6000."/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/caterpillar.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://zx200_description/meshes/caterpillar.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+</robot>

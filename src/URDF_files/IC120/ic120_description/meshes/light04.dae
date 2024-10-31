@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<COLLADA version="1.5.0" xmlns="http://www.collada.org/2008/03/COLLADASchema">
+  <asset>
+    <contributor />
+    <unit meter="1" />
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_lights />
+  <library_materials />
+  <library_effects />
+  <library_cameras />
+  <library_geometries>
+    <geometry id="mesh_1">
+      <mesh>
+        <source id="mesh_1-position" name="position">
+          <float_array id="mesh_1-position-array" count="54">0.8153625726699829 0.5423319935798645 3.3191025257110596 0.8113651275634766 0.5024595856666565 3.34177303314209 0.812753438949585 0.5244253277778625 3.333899736404419 0.812753438949585 0.4571184813976288 3.333899736404419 0.8113651275634766 0.47908422350883484 3.34177303314209 0.8188778162002563 0.4275241196155548 3.299166202545166 0.8153625726699829 0.4392118453979492 3.3191025257110596 0.8268726468086243 0.4275241196155548 3.2538251876831055 0.8228752017021179 0.4234650433063507 3.2764956951141357 0.8329970240592957 0.4571184813976288 3.2190918922424316 0.8303879499435425 0.4392118453979492 3.233889102935791 0.834385335445404 0.5024595856666565 3.2112183570861816 0.834385335445404 0.47908422350883484 3.2112183570861816 0.8303879499435425 0.5423319339752197 3.233889102935791 0.8329970240592957 0.5244253277778625 3.2190918922424316 0.8228752613067627 0.5580788254737854 3.2764956951141357 0.826872706413269 0.5540196895599365 3.2538251876831055 0.8188778758049011 0.5540196895599365 3.299166202545166 </float_array>
+          <technique_common>
+            <accessor source="#mesh_1-position-array" count="18" stride="3">
+              <param name="X" type="float" />
+              <param name="Y" type="float" />
+              <param name="Z" type="float" />
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="mesh_1-vertices">
+          <input semantic="POSITION" source="#mesh_1-position" />
+        </vertices>
+        <triangles material="default" count="16">
+          <input semantic="VERTEX" source="#mesh_1-vertices" offset="0" />
+          <p>0 1 2 1 3 4 3 5 6 1 5 3 5 7 8 7 9 10 5 9 7 9 11 12 11 13 14 9 13 11 5 13 9 1 13 5 13 15 16 1 15 13 0 15 1 17 15 0</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_images />
+  <library_visual_scenes>
+    <visual_scene id="Scene">
+      <node id="node_1" sid="node_1" type="NODE">
+        <matrix>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#mesh_1" />
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <library_animations />
+  <scene>
+    <instance_visual_scene url="#Scene" />
+  </scene>
+</COLLADA>

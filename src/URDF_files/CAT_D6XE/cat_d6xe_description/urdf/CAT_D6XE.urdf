@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="CAT_D6XE">
+  <joint name="blade_joint" type="fixed">
+    <origin xyz="0.0006931 0.0014081 -0.2237615" rpy="0. 0. 0."/>
+    <parent link="body_link"/>
+    <child link="blade_link"/>
+  </joint>
+  <joint name="tracks_joint" type="fixed">
+    <origin xyz="0.0006931 0.0014081 -0.2237615" rpy="0. 0. 0."/>
+    <parent link="body_link"/>
+    <child link="tracks_link"/>
+  </joint>
+  <link name="body_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="10000."/>
+      <inertia ixx="1." ixy="0." ixz="0." iyy="1." iyz="0." izz="1."/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0006931 0.0014081 -0.2237615" rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://cat_d6xe_description/meshes/body.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0006931 0.0014081 -0.2237615" rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://cat_d6xe_description/meshes/body.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="blade_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="3000."/>
+      <inertia ixx="1." ixy="0." ixz="0." iyy="1." iyz="0." izz="1."/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://cat_d6xe_description/meshes/blade.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://cat_d6xe_description/meshes/blade.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="tracks_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="10000."/>
+      <inertia ixx="1." ixy="0." ixz="0." iyy="1." iyz="0." izz="1."/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://cat_d6xe_description/meshes/tracks.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://cat_d6xe_description/meshes/tracks.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+</robot>

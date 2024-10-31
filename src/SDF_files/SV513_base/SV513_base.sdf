@@ -1,0 +1,133 @@
+<?xml version="1.0" ?>
+<!--
+  Copyright 2024 DeepX, Inc. All rights reserved
+
+  SV513 vibratory roller model
+-->
+<sdf version="1.9">
+    <model name='SV513_base'>
+        <pose>0 0 0 0 0 0</pose>
+
+        <link name='SV513'>
+            <pose>0 0 0 0 0 0</pose>
+            <inertial>
+                <mass>12000</mass>
+                <inertia>
+                    <ixx>2000</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>4000</iyy>
+                    <iyz>0</iyz>
+                    <izz>6000</izz>
+                </inertia>
+            </inertial>
+            <visual name='visual'>
+                <!--specify position relative to TF link-->
+                <pose relative_to="chassis_link">0 0 0 0 0 0</pose>
+
+                <geometry>
+                    <mesh>
+                        <scale>1 1 1</scale>
+                        <uri>./meshes/SV513.stl</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <!-- pbr and metal tags don't work -->
+                    <ambient>0.25 0.1 0.115 1.0</ambient>
+                    <diffuse>0.25 0.1 0.115 1.0</diffuse>
+                    <specular>0.25 0.1 0.115 1.0</specular>
+                </material>
+            </visual>
+        </link>
+
+        <!-- TRACKS FOR LOCOMOTION -->
+        <link name='left_track'>
+            <pose>0 0.7 0.79 0 0 0</pose>
+            <gravity>1</gravity>
+            <kinematic>0</kinematic>
+            <!-- Debug visual -->
+            
+            <!-- <visual name="left_track_visual">
+            <pose>0 0 0 0 0 0</pose>
+            <geometry>
+               <box>
+                  <size>5.84 0.69 1.58</size>
+               </box>
+            </geometry>
+            <material>
+               <ambient>1.0 0 0 1.0</ambient>
+               <diffuse>1.0 0 0 1.0</diffuse>
+               <specular>0.2 0.2 0.2 1.0</specular>
+            </material>
+            </visual> -->
+           
+            
+            <collision name='left_track_collision'>
+            <pose>0 0 0 0 0 0</pose>
+            <geometry>
+                <box>
+                    <size>5.84 0.69 1.58</size>
+                </box>
+            </geometry>
+            <surface>
+                <friction>
+                   <ode>
+                       <mu>0.7</mu>
+                       <mu2>150</mu2>
+                       <fdir1>0 1 0</fdir1>
+                   </ode>
+                </friction>
+            </surface>
+            </collision>
+        </link>
+      
+        <link name='right_track'>
+            <pose>0 -0.7 0.79 0 0 0</pose>
+            <gravity>1</gravity>
+            <kinematic>0</kinematic>
+            <!-- Debug visual -->
+            
+            <!-- <visual name="left_track_visual">
+                <pose>0 0 0 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>5.84 0.69 1.58</size>
+                    </box>
+                </geometry>
+                <material>
+                    <ambient>0 1.0 0 1.0</ambient>
+                    <diffuse>0 1.0 0 1.0</diffuse>
+                    <specular>0.2 0.2 0.2 1.0</specular>
+                </material>
+            </visual>
+            -->
+            <collision name='left_track_collision'>
+                <pose>0 0 0 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>5.84 0.69 1.58</size>
+                    </box>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>0.7</mu>
+                            <mu2>150</mu2>
+                            <fdir1>0 1 0</fdir1>
+                        </ode>
+                    </friction>
+                </surface>
+            </collision>
+        </link>
+
+        <joint name='left_track_j' type='fixed'>
+            <child>left_track</child>
+            <parent>SV513</parent>
+        </joint>
+        <joint name='right_track_j' type='fixed'>
+            <child>right_track</child>
+            <parent>SV513</parent>
+        </joint>
+
+    </model>
+</sdf>

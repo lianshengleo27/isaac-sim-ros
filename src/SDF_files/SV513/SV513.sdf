@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2024 DeepX, Inc. All rights reserved
+
+-->
+<sdf version="1.9">
+   <model name='SV513'>
+      <include merge="true">
+         <uri>SV513_base</uri>
+      </include>
+        <!-- ACTUATION PLUGINS -->
+
+        <!-- LOCOMOTION PLUGINS -->
+        <plugin name="gz::sim::systems::TrackedVehicle" filename="gz-sim-tracked-vehicle-system">
+            <left_track><link>left_track</link></left_track><!--define-->
+            <right_track><link>right_track</link></right_track><!--define-->
+            <tracks_separation>2.16</tracks_separation><!--edit-->
+            <tracks_height>2.0</tracks_height><!--edit-->
+            <steering_efficiency>0.5</steering_efficiency><!--edit-->
+            <!--debug>1</debug-->
+        </plugin>
+
+        <plugin name='gz::sim::systems::TrackController' filename='gz-sim-track-controller-system'>
+            <link>left_track</link>
+            <min_velocity>-3.0</min_velocity>
+            <max_velocity>3.0</max_velocity>
+            <!--debug>1</debug-->
+        </plugin>
+
+        <plugin name='gz::sim::systems::TrackController' filename='gz-sim-track-controller-system'>
+            <link>right_track</link>
+            <min_velocity>-3.0</min_velocity>
+            <max_velocity>3.0</max_velocity>
+            <!--debug>1</debug-->
+        </plugin>
+
+      <!-- Moving Forward: W -->
+      <plugin filename="gz-sim-triggered-publisher-system"
+              name="gz::sim::systems::TriggeredPublisher">
+          <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+              <match field="data">87</match>
+          </input>
+          <output type="gz.msgs.Twist" topic="/model/SV513/cmd_vel">
+              linear: {x: 3.0}, angular: {z: 0.0}
+          </output>
+      </plugin>
+
+      <!-- Moving Backward: X -->
+      <plugin filename="gz-sim-triggered-publisher-system"
+              name="gz::sim::systems::TriggeredPublisher">
+          <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+              <match field="data">88</match>
+          </input>
+          <output type="gz.msgs.Twist" topic="/model/SV513/cmd_vel">
+              linear: {x: -3.0}, angular: {z: 0.0}
+          </output>
+      </plugin>
+
+      <!-- Stop: S -->
+      <plugin filename="gz-sim-triggered-publisher-system"
+              name="gz::sim::systems::TriggeredPublisher">
+          <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+              <match field="data">83</match>
+          </input>
+          <output type="gz.msgs.Twist" topic="/model/SV513/cmd_vel">
+              linear: {x: 0.0}, angular: {z: 0.0}
+          </output>
+      </plugin>
+
+      <!-- Left: A -->
+      <plugin filename="gz-sim-triggered-publisher-system"
+              name="gz::sim::systems::TriggeredPublisher">
+          <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+              <match field="data">65</match>
+          </input>
+          <output type="gz.msgs.Twist" topic="/model/SV513/cmd_vel">
+              linear: {x: 0.0}, angular: {z: 1.0}
+          </output>
+      </plugin>
+
+      <!-- Right: D -->
+      <plugin filename="gz-sim-triggered-publisher-system"
+              name="gz::sim::systems::TriggeredPublisher">
+          <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+              <match field="data">68</match>
+          </input>
+          <output type="gz.msgs.Twist" topic="/model/SV513/cmd_vel">
+              linear: {x: 0.0}, angular: {z: -1.0}
+          </output>
+      </plugin>
+
+      <!-- Forward Left: Q -->
+      <plugin filename="gz-sim-triggered-publisher-system"
+              name="gz::sim::systems::TriggeredPublisher">
+          <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+              <match field="data">81</match>
+          </input>
+          <output type="gz.msgs.Twist" topic="/model/SV513/cmd_vel">
+              linear: {x: 3.0}, angular: {z: 1.0}
+          </output>
+      </plugin>
+
+      <!-- Forward Right: E -->
+      <plugin filename="gz-sim-triggered-publisher-system"
+              name="gz::sim::systems::TriggeredPublisher">
+          <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+              <match field="data">69</match>
+          </input>
+          <output type="gz.msgs.Twist" topic="/model/SV513/cmd_vel">
+              linear: {x: 3.0}, angular: {z: -1.0}
+          </output>
+      </plugin>
+
+      <!-- Back Left: Z -->
+      <plugin filename="gz-sim-triggered-publisher-system"
+              name="gz::sim::systems::TriggeredPublisher">
+          <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+              <match field="data">90</match>
+          </input>
+          <output type="gz.msgs.Twist" topic="/model/SV513/cmd_vel">
+              linear: {x: -3.0}, angular: {z: 1.0}
+          </output>
+      </plugin>
+
+      <!-- Back Right: C -->
+      <plugin filename="gz-sim-triggered-publisher-system"
+              name="gz::sim::systems::TriggeredPublisher">
+          <input type="gz.msgs.Int32" topic="/keyboard/keypress">
+              <match field="data">67</match>
+          </input>
+          <output type="gz.msgs.Twist" topic="/model/SV513/cmd_vel">
+              linear: {x: -3.0}, angular: {z: -1.0}
+          </output>
+      </plugin>
+   </model>
+</sdf>

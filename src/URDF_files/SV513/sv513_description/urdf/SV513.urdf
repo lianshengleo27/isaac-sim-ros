@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="SV513">
+  <link name="SV513">
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://sv513_description/meshes/visual_geometry_SV513.obj" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+  </link>
+</robot>

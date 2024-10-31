@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2024 DeepX, Inc. All rights reserved
+-->
+<sdf version="1.9">
+   <model name="CAT_D6XE">
+      <pose>0 0 0 0 0 0</pose>
+
+      <link name="body_link">
+         <pose>0 0 0 0 0 0</pose>
+         <inertial>
+            <mass>10000</mass>
+         </inertial>
+         <visual name="body_link_visual">
+            <pose relative_to="body_link">0 0 0 0 0 0</pose>
+            <geometry>
+               <mesh>
+                  <uri>./meshes/body.stl</uri>
+               </mesh>
+            </geometry>
+            <material>
+               <ambient>0.953 0.707 0.164 1.0</ambient>
+               <diffuse>0.953 0.707 0.164 1.0</diffuse>
+               <specular>0.2 0.2 0.2 1.0</specular>
+            </material>
+         </visual>
+      </link>
+
+      <joint name="tracks_joint" type="fixed">
+         <pose>0 0 0 0 0 0</pose>
+         <parent>body_link</parent>
+         <child>tracks_link</child>
+      </joint>
+
+      <joint name="blade_joint" type="fixed">
+         <pose>0 0 0 0 0 0</pose>
+         <parent>body_link</parent>
+         <child>blade_link</child>
+      </joint>
+
+      <link name="blade_link">
+         <pose>0 0 0 0 0 0</pose>
+         <inertial>
+            <mass>3000</mass>
+         </inertial>
+         <visual name="body_link_visual">
+            <pose relative_to="body_link">0 0 0 0 0 0</pose>
+            <geometry>
+               <mesh>
+                  <uri>./meshes/blade.stl</uri>
+               </mesh>
+            </geometry>
+            <material>
+               <ambient>0.953 0.707 0.164 1.0</ambient>
+               <diffuse>0.953 0.707 0.164 1.0</diffuse>
+               <specular>0.2 0.2 0.2 1.0</specular>
+            </material>
+         </visual>
+      </link>
+
+
+      <link name="tracks_link">
+         <!-- Only for the visual -->
+         <pose>0 0 0 0 0 0</pose>
+         <inertial>
+            <mass>10000</mass>
+         </inertial>
+         <visual name="tracks_link_visual">
+            <pose relative_to="body_link">0 0 0 0 0 0</pose>
+            <geometry>
+               <mesh>
+                  <uri>./meshes/tracks.stl</uri>
+               </mesh>
+            </geometry>
+            <material>
+               <ambient>0.050 0.050 0.050 1.0</ambient>
+               <diffuse>0.050 0.050 0.050 1.0</diffuse>
+               <specular>0.2 0.2 0.2 1.0</specular>
+            </material>
+         </visual>
+      </link>
+
+      <link name='left_track'>
+         <pose>-0.5 0.965 0.79 0 0 0</pose>
+         <gravity>1</gravity>
+         <kinematic>0</kinematic>
+         <!-- Debug visual -->
+         <!-- 
+         <visual name="left_track_visual">
+            <pose>0 0 0 0 0 0</pose>
+            <geometry>
+               <box>
+                  <size>4.0 1.019 1.58</size>
+               </box>
+            </geometry>
+            <material>
+               <ambient>1.0 0 0 1.0</ambient>
+               <diffuse>1.0 0 0 1.0</diffuse>
+               <specular>0.2 0.2 0.2 1.0</specular>
+            </material>
+         </visual>
+         -->
+         <collision name='left_track_collision'>
+            <pose>0 0 0 0 0 0</pose>
+            <geometry>
+               <box>
+                  <size>4.0 1.019 1.58</size>
+               </box>
+            </geometry>
+            <surface>
+               <friction>
+                  <ode>
+                     <mu>0.7</mu>
+                     <mu2>150</mu2>
+                     <fdir1>0 1 0</fdir1>
+                  </ode>
+               </friction>
+            </surface>
+         </collision>
+      </link>
+      
+      <link name='right_track'>
+         <pose>-0.5 -0.965 0.79 0 0 0</pose>
+         <gravity>1</gravity>
+         <kinematic>0</kinematic>
+         <!-- Debug visual -->
+         <!-- 
+         <visual name="right_track_visual">
+            <pose>0 0 0 0 0 0</pose>
+            <geometry>
+               <box>
+                  <size>4.0 1.019 1.58</size>
+               </box>
+            </geometry>
+            <material>
+               <ambient>0 1.0 0 1.0</ambient>
+               <diffuse>0 1.0 0 1.0</diffuse>
+               <specular>0.2 0.2 0.2 1.0</specular>
+            </material>
+         </visual>
+         -->
+         <collision name='right_track_collision'>
+            <pose>0 0 0 0 0 0</pose>
+            <geometry>
+               <box>
+                  <size>4.0 1.019 1.58</size>
+               </box>
+            </geometry>
+            <surface>
+               <friction>
+                  <ode>
+                     <mu>0.7</mu>
+                     <mu2>150</mu2>
+                     <fdir1>0 1 0</fdir1>
+                  </ode>
+               </friction>
+            </surface>
+         </collision>
+      </link>
+
+      <joint name='left_track_j' type='fixed'>
+         <child>left_track</child>
+         <parent>body_link</parent>
+      </joint>
+      <joint name='right_track_j' type='fixed'>
+         <child>right_track</child>
+         <parent>body_link</parent>
+      </joint>
+
+   </model>
+</sdf>

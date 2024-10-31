@@ -1,0 +1,736 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 2024 DeepX, Inc. All rights reserved
+-->
+<sdf version="1.9">
+  <model name='zx200_base'>
+    <pose>0 0 0 0 0 0</pose>
+    <!--
+########################################################################################
+##############################   BODY   ################################################
+########################################################################################    
+-->
+    <link name='caterpillar_link'>
+      <pose>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.174 -0.0015 0.44 0 0 0</pose>
+        <mass>5000</mass>
+        <inertia>
+          <ixx>2000</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>4000</iyy>
+          <iyz>0</iyz>
+          <izz>6000</izz>
+        </inertia>
+      </inertial>
+      <visual name='caterpillar_visual'>
+        <geometry>
+          <mesh>
+            <uri>./meshes/caterpillar.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.0 1.0</ambient>
+          <diffuse>0.0 0.0 0.0 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+    <joint name='body_joint' type='revolute'>
+      <pose relative_to='caterpillar_link'>0 0 0.9069 0 0 0</pose>
+      <parent>caterpillar_link</parent>
+      <child>body_link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <!--Effort
+          to avoid velocity control violating the kinematics!-->
+          <effort>1.0e8</effort>
+          <velocity>0.2</velocity>
+        </limit>
+      </axis>
+    </joint>
+
+    <link name='body_link'>
+      <pose relative_to='body_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.43968 0.8174 1.3546 0 0 0</pose>
+        <mass>7000</mass>
+        <inertia>
+          <ixx>4751.6</ixx>
+          <ixy>-127.4</ixy>
+          <ixz>348.5</ixz>
+          <iyy>5734.1</iyy>
+          <iyz>-68.7</iyz>
+          <izz>9065.9</izz>
+        </inertia>
+      </inertial>
+      <visual name='body_visual'>
+        <geometry>
+          <mesh>
+            <uri>./meshes/body.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.953 0.707 0.164 1.0</ambient>
+          <diffuse>0.953 0.707 0.164 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+    </link>
+    <!--
+########################################################################################
+##############################   BOOM   ################################################
+########################################################################################    
+-->
+    <joint name='boom_joint' type='revolute'>
+      <pose relative_to='body_joint'>0.18 -0.04 0.93 0 -0.7 0</pose>
+      <parent>body_link</parent>
+      <child>boom_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <!--Effort to avoid velocity control violating the kinematics!-->
+          <effort>1.0e8</effort>
+          <velocity>0.6159937255</velocity>
+          <lower>-0.5</lower>
+          <upper>1.20</upper>
+        </limit>
+      </axis>
+    </joint>
+
+    <link name='boom_link'>
+      <pose relative_to='boom_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>2.6876 0.0064 0.5874 0 0 0</pose>
+        <mass>1010</mass>
+        <inertia>
+          <ixx>103.9</ixx>
+          <ixy>0.0</ixy>
+          <ixz>44.8</ixz>
+          <iyy>1574.1</iyy>
+          <iyz>0.0</iyz>
+          <izz>1489.6</izz>
+        </inertia>
+      </inertial>
+      <visual name='boom_visual'>
+        <geometry>
+          <mesh>
+            <uri>./meshes/boom.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.953 0.707 0.164 1.0</ambient>
+          <diffuse>0.953 0.707 0.164 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+      <collision name="boom_collision">
+        <geometry>
+          <mesh>
+            <uri>./meshes/boom_collision.obj</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name='boom_cylinder_joint' type='revolute'>
+      <pose relative_to='body_joint'>0.664 0.0 0.325 0 -1.342 0</pose>
+      <parent>body_link</parent>
+      <child>boom_cylinder_link</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+
+    <link name='boom_cylinder_link'>
+      <pose relative_to='boom_cylinder_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.6635 -0.03153 0.577 0 0 0</pose>
+        <mass>131.62</mass>
+        <inertia>
+          <ixx>9.216249</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>27.606432</iyy>
+          <iyz>0</iyz>
+          <izz>36.503907</izz>
+        </inertia>
+      </inertial>
+      <visual name='boom_cylinder_visual'>
+        <geometry>
+          <mesh>
+            <uri>./meshes/boom_cylinders.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.0 1.0</ambient>
+          <diffuse>0.0 0.0 0.0 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+    <joint name='boom_piston_joint' type='prismatic'>
+      <pose relative_to='boom_cylinder_joint'>1.302 0.0 0 0 0 0</pose>
+      <parent>boom_cylinder_link</parent>
+      <child>boom_piston_link</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+      </axis>
+    </joint>
+
+    <link name='boom_piston_link'>
+      <pose relative_to='boom_piston_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.8046 -0.0389 0 0 0 0</pose>
+        <mass>78.08</mass>
+        <inertia>
+          <ixx>6.6836</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>22.5995</iyy>
+          <iyz>0</iyz>
+          <izz>29.2292</izz>
+        </inertia>
+      </inertial>
+      <visual name='boom_piston_visual'>
+        <geometry>
+          <mesh>
+            <uri>./meshes/boom_pistons.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.4 0.4 0.4 1.0</ambient>
+          <diffuse>0.4 0.4 0.4 1.0</diffuse>
+          <specular>1.0 1.0 1.0 1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+    <joint name='boom_piston_constraint' type='ball'>
+      <pose relative_to='boom_cylinder_joint'>2.768 0 0 0 0 0</pose>
+      <parent>boom_piston_link</parent>
+      <child>boom_link</child>
+    </joint>
+
+
+    <!--
+########################################################################################
+##############################   ARM   #################################################
+########################################################################################    
+-->
+    <joint name='arm_joint' type='revolute'>
+      <pose relative_to='boom_joint'>5.68 0 0 0 1.570796 0</pose>
+      <parent>boom_link</parent>
+      <child>arm_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <!--Effort
+          to avoid velocity control violating the kinematics!-->
+          <effort>1.0e8</effort>
+          <velocity>0.5</velocity>
+          <lower>-1.05</lower>
+          <upper>1.14</upper>
+        </limit>
+      </axis>
+    </joint>
+
+    <link name='arm_link'>
+      <pose relative_to='arm_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.2075 0.0 -0.9177 0 0 0</pose>
+        <mass>480</mass>
+        <inertia>
+          <ixx>14.24</ixx>
+          <ixy>0.0</ixy>
+          <ixz>31.36</ixz>
+          <iyy>319.92</iyy>
+          <iyz>0.0</iyz>
+          <izz>309.47</izz>
+        </inertia>
+      </inertial>
+      <visual name='arm_visual'>
+        <geometry>
+          <mesh>
+            <uri>./meshes/arm.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.953 0.707 0.164 1.0</ambient>
+          <diffuse>0.953 0.707 0.164 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+      <collision name="arm_collision">
+        <geometry>
+          <mesh>
+            <uri>./meshes/arm_collision.obj</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name='arm_cylinder_joint' type='revolute'>
+      <pose relative_to='boom_joint'>3.245 0 1.1624 0 0.1361 0</pose>
+      <parent>boom_link</parent>
+      <child>arm_cylinder_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+    <link name='arm_cylinder_link'>
+      <pose relative_to="arm_cylinder_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.9761 0.0 -0.1213 0 0 0</pose>
+        <mass>65.81</mass>
+        <inertia>
+          <ixx>0.1</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>9.95</iyy>
+          <iyz>0.0</iyz>
+          <izz>9.95</izz>
+        </inertia>
+      </inertial>
+      <visual name='arm_cylinder_visual'>
+        <geometry>
+          <mesh>
+            <uri>./meshes/arm_cylinder.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.0 1.0</ambient>
+          <diffuse>0.0 0.0 0.0 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+    <joint name='arm_piston_joint' type='prismatic'>
+      <pose relative_to="arm_cylinder_joint">0.91 0.0 0 0 0 0</pose>
+      <parent>arm_cylinder_link</parent>
+      <child>arm_piston_link</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <!--Effort
+          to avoid velocity control violating the kinematics!-->
+          <effort>1e8</effort>
+          <lower>-0.85567</lower>
+          <upper>0.93719</upper>
+        </limit>
+      </axis>
+    </joint>
+
+    <link name='arm_piston_link'>
+      <pose relative_to="arm_piston_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>1.045 0.0 0.0 0 0 0</pose>
+        <mass>48.18</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>9.83</iyy>
+          <iyz>0.0</iyz>
+          <izz>9.83</izz>
+        </inertia>
+      </inertial>
+      <visual name='arm_piston_visual'>
+        <geometry>
+          <mesh>
+            <uri>./meshes/arm_piston.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.4 0.4 0.4 1.0</ambient>
+          <diffuse>0.4 0.4 0.4 1.0</diffuse>
+          <specular>1.0 1.0 1.0 1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+    <joint name='arm_piston_joint_constraint' type='ball'>
+      <pose relative_to="arm_cylinder_joint">2.80 0 0 0 0 0</pose>
+      <parent>arm_piston_link</parent>
+      <child>arm_link</child>
+    </joint>
+
+    <!--
+########################################################################################
+##############################   BUCKET   ##############################################
+########################################################################################    
+-->
+    <joint name='bucket_joint' type='revolute'>
+      <pose relative_to="arm_joint">2.915 0 0 0 0 0</pose>
+      <parent>arm_link</parent>
+      <child>bucket_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <!--Effort
+          to avoid velocity control violating the kinematics!-->
+          <effort>1e8</effort>
+          <velocity>0.5</velocity>
+          <lower>-0.216</lower>
+          <upper>2.45</upper>
+        </limit>
+      </axis>
+    </joint>
+
+    <link name='bucket_link'>
+      <pose relative_to="bucket_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.602 0.0 0.417 0 0 0</pose>
+        <mass>351.5</mass>
+        <inertia>
+          <ixx>51.39</ixx>
+          <ixy>0.0</ixy>
+          <ixz>10.40</ixz>
+          <iyy>77.64</iyy>
+          <iyz>0.0</iyz>
+          <izz>91.99</izz>
+        </inertia>
+      </inertial>
+      <visual name='bucket_visual'>
+        <geometry>
+          <mesh>
+            <uri>./meshes/bucket.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.953 0.707 0.164 1.0</ambient>
+          <diffuse>0.953 0.707 0.164 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+      <collision name="bucket_collision">
+        <geometry>
+          <mesh>
+            <uri>./meshes/bucket_collision.obj</uri>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name='bucket_end_joint' type='fixed'>
+      <pose relative_to="bucket_joint">0 0 1.23 0 0.872664625997 0</pose>
+      <parent>bucket_link</parent>
+      <child>bucket_end_link</child>
+    </joint>
+
+      <link name='bucket_end_link'>
+        <pose relative_to="bucket_end_joint">0 0 0 0 0 0</pose>
+        <inertial>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>1e-6</ixx>
+            <ixy>0.0</ixy>
+            <ixz>0.0</ixz>
+            <iyy>1e-6</iyy>
+            <iyz>0.0</iyz>
+            <izz>1e-6</izz>
+          </inertia>
+        </inertial>
+      </link>
+
+    <joint name='bucket_cylinder_joint' type='revolute'>
+      <pose relative_to="arm_joint">0.42 0.0 0.665 0 0.02618 0</pose>
+      <parent>arm_link</parent>
+      <child>bucket_cylinder_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+    <link name='bucket_cylinder_link'>
+      <pose relative_to="bucket_cylinder_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.7903 0 0.04 0 0 0</pose>
+        <mass>65.81</mass>
+        <inertia>
+          <ixx>0.1</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>9.95</iyy>
+          <iyz>0.0</iyz>
+          <izz>9.95</izz>
+        </inertia>
+      </inertial>
+      <visual name='bucket_cylinder_visual'>
+        <geometry>
+          <mesh>
+            <uri>./meshes/bucket_cylinder.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.0 1.0</ambient>
+          <diffuse>0.0 0.0 0.0 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+    <joint name='bucket_piston_joint' type='prismatic'>
+      <pose relative_to="bucket_cylinder_joint">0.43 0 0 0 0 0</pose>
+      <parent>bucket_cylinder_link</parent>
+      <child>bucket_piston_link</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <!--Effort
+          to avoid velocity control violating the kinematics!-->
+          <effort>1e8</effort>
+          <lower>-0.08</lower>
+          <upper>1.035</upper>
+        </limit>
+      </axis>
+    </joint>
+
+    <link name='bucket_piston_link'>
+      <pose relative_to="bucket_piston_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.8293 0.0 0.0 0 0 0</pose>
+        <mass>48.19</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>9.83</iyy>
+          <iyz>0.0</iyz>
+          <izz>9.83</izz>
+        </inertia>
+      </inertial>
+      <visual name='bucker_piston_visual'>
+        <geometry>
+          <mesh>
+            <uri>./meshes/bucket_piston.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.4 0.4 0.4 1.0</ambient>
+          <diffuse>0.4 0.4 0.4 1.0</diffuse>
+          <specular>1.0 1.0 1.0 1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+    <joint name='bucket_piston_constraint' type='ball'>
+      <pose relative_to='bucket_cylinder_joint'>1.866 0 0 0 0 0</pose>
+      <parent>bucket_piston_link</parent>
+      <child>bucket_h_linkage_link</child>
+    </joint>
+
+    <joint name='bucket_side_linkage_joint' type='revolute'>
+      <pose relative_to='arm_joint'>2.4675 0 0.0397 0 -1.8437 0</pose>
+      <parent>arm_link</parent>
+      <child>bucket_side_linkage_link</child>
+      <axis>
+        <xyz>0 -1 0</xyz>
+      </axis>
+    </joint>
+
+    <link name='bucket_side_linkage_link'>
+      <pose relative_to='bucket_side_linkage_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.095 0.0 0.2829 0 0 0</pose>
+        <mass>16.3471</mass>
+        <inertia>
+          <ixx>0.2849</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.7623</iyy>
+          <iyz>0</iyz>
+          <izz>1.0241</izz>
+        </inertia>
+      </inertial>
+      <visual name='bucket_side_linkage_visual'>
+        <geometry>
+          <mesh>
+            <uri>./meshes/bucket_linkages_side.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.953 0.707 0.164 1.0</ambient>
+          <diffuse>0.953 0.707 0.164 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+    <joint name='bucket_h_linkage_joint' type='revolute'>
+      <pose relative_to='bucket_cylinder_joint'>1.87 0 0 0 0.24 0</pose>
+      <parent>bucket_side_linkage_link</parent>
+      <child>bucket_h_linkage_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+      </axis>
+    </joint>
+
+    <link name='bucket_h_linkage_link'>
+      <pose relative_to='bucket_h_linkage_joint'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.0 -0.254500 0.0 0 0 0</pose>
+        <mass>57.45</mass>
+        <inertia>
+          <ixx>0.29</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>1.63</iyy>
+          <iyz>0.0</iyz>
+          <izz>1.88</izz>
+        </inertia>
+      </inertial>
+      <visual name='bucket_h_linkage_visual'>
+        <geometry>
+          <mesh>
+            <uri>./meshes/bucket_linkage_H_link.obj</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.953 0.707 0.164 1.0</ambient>
+          <diffuse>0.953 0.707 0.164 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+    <joint name='bucket_linkage_constraint' type='ball'>
+      <pose relative_to='bucket_joint'>-0.075 0 0.470 0 0 0</pose>
+      <parent>bucket_h_linkage_link</parent>
+      <child>bucket_link</child>
+    </joint>
+
+    <joint name='tooth_joint' type='fixed'>
+      <pose relative_to="bucket_joint">1.473 0 0 0 0 0</pose>
+      <parent>bucket_link</parent>
+      <child>tooth_link</child>
+    </joint>
+
+    <link name='tooth_link'>
+      <pose relative_to="tooth_joint">0 0 0 0 0 0</pose>
+      <inertial>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1e-6</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-6</iyy>
+          <iyz>0.0</iyz>
+          <izz>1e-6</izz>
+        </inertia>
+      </inertial>
+      <visual name='tooth_visual'>
+        <pose relative_to="tooth_joint">0 0 0 -0.785398 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.03 0.09 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1 0 0 1.0</ambient>
+          <diffuse>1 0 0 1.0</diffuse>
+          <specular>0.2 0.2 0.2 1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+    <!--
+########################################################################################
+##############################   TRACKS   ##############################################
+########################################################################################    
+-->
+    <link name='left_track'>
+      <pose>0 0.965 0.35 0 0 0</pose>
+      <gravity>1</gravity>
+      <kinematic>0</kinematic>
+      <!-- Debug visual -->
+
+      <!-- <visual name="left_track_visual">
+           <pose>0 0 0 0 0 0</pose>
+           <geometry>
+              <box>
+                 <size>3.6 0.6 0.7</size>
+              </box>
+           </geometry>
+           <material>
+              <ambient>1.0 0 0 1.0</ambient>
+              <diffuse>1.0 0 0 1.0</diffuse>
+              <specular>0.2 0.2 0.2 1.0</specular>
+           </material>
+        </visual> -->
+
+      <collision name='left_track_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>3.6 0.6 0.7</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.7</mu>
+              <mu2>150</mu2>
+              <fdir1>0 1 0</fdir1>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+    </link>
+
+    <link name='right_track'>
+      <pose>0 -0.965 0.35 0 0 0</pose>
+      <gravity>1</gravity>
+      <kinematic>0</kinematic>
+      <!-- Debug visual -->
+
+      <!-- <visual name="right_track_visual">
+           <pose>0 0 0 0 0 0</pose>
+           <geometry>
+              <box>
+                 <size>3.6 0.6 0.7</size>
+              </box>
+           </geometry>
+           <material>
+              <ambient>0 1.0 0 1.0</ambient>
+              <diffuse>0 1.0 0 1.0</diffuse>
+              <specular>0.2 0.2 0.2 1.0</specular>
+           </material>
+        </visual> -->
+
+      <collision name='right_track_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>3.6 0.6 0.7</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.7</mu>
+              <mu2>150</mu2>
+              <fdir1>0 1 0</fdir1>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+    </link>
+
+    <joint name='left_track_j' type='fixed'>
+      <child>left_track</child>
+      <parent>caterpillar_link</parent>
+    </joint>
+    <joint name='right_track_j' type='fixed'>
+      <child>right_track</child>
+      <parent>caterpillar_link</parent>
+    </joint>
+
+  </model>
+</sdf>

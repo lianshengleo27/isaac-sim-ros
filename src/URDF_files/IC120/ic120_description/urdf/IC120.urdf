@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<robot name="IC120">
+  <joint name="cylinder_head_joint" type="fixed">
+    <origin xyz="0.75792 0. 0.73083" rpy="0. 0. 0."/>
+    <parent link="body_link"/>
+    <child link="cylinder_head_link"/>
+  </joint>
+  <joint name="cylinder_rod_prismatic_joint" type="fixed">
+    <origin xyz="1.4989 0. 0.51788" rpy="0. 0. 0."/>
+    <parent link="cylinder_head_link"/>
+    <child link="cylinder_rod_link"/>
+  </joint>
+  <joint name="left_sprocket_joint" type="fixed">
+    <origin xyz="2.35 1. 0.65" rpy="0. 0. 0."/>
+    <parent link="body_link"/>
+    <child link="left_sprocket_link"/>
+  </joint>
+  <joint name="right_sprocket_joint" type="fixed">
+    <origin xyz="2.35 -1. 0.65" rpy="0. 0. 0."/>
+    <parent link="body_link"/>
+    <child link="right_sprocket_link"/>
+  </joint>
+  <joint name="vessel_pin_joint" type="revolute">
+    <origin xyz="-3.0153 0. 0.94605" rpy="0. 0. 1.5707964"/>
+    <parent link="body_link"/>
+    <child link="vessel_pin_link"/>
+    <axis xyz="1. 0. 0."/>
+    <limit lower="-1.13446" upper="0." effort="100000000." velocity="0."/>
+  </joint>
+  <link name="body_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="7000"/>
+      <inertia ixx="2000." ixy="0." ixz="0." iyy="4000.0" iyz="0." izz="6000.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/light04.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/mirr3.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/mirr_R.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/mirr_L.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/BAKE_body.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/Flamp_Y.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/Flamp_R.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/Flamp_G.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/Blamp_Y.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/Blamp_R.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/Blamp_G.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/BAKE_body.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="cylinder_head_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="0.03"/>
+      <inertia ixx="1.0" ixy="0." ixz="0." iyy="1.0" iyz="0." izz="1.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/Mcyilnder.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/Mcyilnder.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/M_cyl_dm.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/M_cyl_dm.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="cylinder_rod_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="0.03"/>
+      <inertia ixx="1." ixy="0." ixz="0." iyy="1." iyz="0." izz="1."/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/Scylinder.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/Scylinder.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_sprocket_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="1."/>
+      <inertia ixx="1." ixy="0." ixz="0." iyy="1." iyz="0." izz="1."/>
+    </inertial>
+  </link>
+  <link name="right_sprocket_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="1."/>
+      <inertia ixx="1." ixy="0." ixz="0." iyy="1." iyz="0." izz="1."/>
+    </inertial>
+  </link>
+  <link name="vessel_pin_link">
+    <inertial>
+      <origin xyz="0. 0. 0." rpy="0. 0. 0."/>
+      <mass value="3000."/>
+      <inertia ixx="2000." ixy="0." ixz="0." iyy="4000." iyz="0." izz="6000."/>
+    </inertial>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. -1.5707964"/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/s_cyl_dm.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. -1.5707964"/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/BAKE_body_001.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. -1.5707964"/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/backets_Cyl.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <visual>
+      <origin xyz="0. 0. 0." rpy="0. 0. -1.5707964"/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/backets.dae" scale="1. 1. 1."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0. 0. 0." rpy="0. 0. -1.5707964"/>
+      <geometry>
+        <mesh filename="package://ic120_description/meshes/backets.dae" scale="1. 1. 1."/>
+      </geometry>
+    </collision>
+  </link>
+</robot>
