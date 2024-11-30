@@ -1,6 +1,6 @@
 # isaac-sim-ros
 
-ROS2 packages for controlling robots in isaac sim
+ROS2 packages for controlling robots (Nav2 & MoveIt) in isaac sim
 ## 1. Installation
 install depenencies:
 ```bash
